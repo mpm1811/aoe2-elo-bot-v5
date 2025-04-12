@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createClient } from "@supabase/supabase-js";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { authApi } from "@/services/apiClient";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -18,14 +18,6 @@ import {
 } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Separator } from "@/components/ui/separator";
-
-// Create Supabase client
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-// Initialize Supabase client only if credentials are available
-const supabase =
-  supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
 
 // Form schema
 const loginSchema = z.object({
@@ -57,32 +49,11 @@ const LoginForm = () => {
     setError(null);
 
     try {
-      if (!supabase) {
-        throw new Error(
-          "Supabase client is not initialized. Please check your environment variables.",
-        );
-      }
+      const result = await authApi.signIn(data.email, data.password);
 
-      const { data: authData, error: authError } =
-        await supabase.auth.signInWithPassword({
-          email: data.email,
-          password: data.password,
-        });
-
-      if (authError) {
-        throw new Error(authError.message);
-      }
-
-      if (authData?.user) {
-        // Check user role (this is a simplified example - actual implementation would depend on your data structure)
-        const { data: userData } = await supabase
-          .from("users")
-          .select("role")
-          .eq("id", authData.user.id)
-          .single();
-
+      if (result.user) {
         // Redirect based on role
-        if (userData?.role === "admin") {
+        if (result.role === "admin") {
           navigate("/admin");
         } else {
           navigate("/");

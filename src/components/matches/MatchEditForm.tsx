@@ -82,15 +82,15 @@ const MatchEditForm: React.FC = () => {
 
   // Form for updating match results
   const {
-    register: registerResult,
+    register,
     handleSubmit: handleSubmitResult,
     reset: resetResult,
-    formState: { errors: resultErrors },
+    formState: { errors },
   } = useForm<MatchResultFormValues>({
     resolver: zodResolver(matchResultSchema),
     defaultValues: {
-      team1Score: "",
-      team2Score: "",
+      team1Score: 0,
+      team2Score: 0,
     },
   });
 
@@ -129,8 +129,8 @@ const MatchEditForm: React.FC = () => {
           if (matchData) {
             setMatch(matchData);
             resetResult({
-              team1Score: matchData.team1Score?.toString() || "",
-              team2Score: matchData.team2Score?.toString() || "",
+              team1Score: matchData.team1Score !== undefined ? matchData.team1Score : 0,
+              team2Score: matchData.team2Score !== undefined ? matchData.team2Score : 0,
             });
           }
         } else {

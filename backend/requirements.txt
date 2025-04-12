@@ -1,0 +1,18 @@
+flask==2.3.3
+flask-cors==4.0.0
+python-dotenv==1.0.0
+supabase>=2.0.3
+# postgrest-py>=0.11.0
+gotrue>=0.6.0
+realtime>=1.0.0
+storage3>=0.6.0
+# functions-py>=0.3.2
+psycopg2-binary==2.9.9
+pyjwt==2.8.0
+gunicorn==21.2.0
+requests==2.31.0
+pandas>=2.0.3
+matplotlib==3.7.2
+jupyter==1.0.0
+notebook==6.5.5
+# httpx>=0.23.0

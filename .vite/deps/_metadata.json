@@ -1,0 +1,55 @@
+{
+  "hash": "41020e23",
+  "configHash": "82f15fad",
+  "lockfileHash": "ce70e051",
+  "browserHash": "736f60d1",
+  "optimized": {
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "fd064c6b",
+      "needsInterop": true
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "50697ba2",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "ea263861",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "e7d57033",
+      "needsInterop": false
+    },
+    "tempo-devtools": {
+      "src": "../../node_modules/tempo-devtools/dist/index.js",
+      "file": "tempo-devtools.js",
+      "fileHash": "5244c264",
+      "needsInterop": true
+    },
+    "lucide-react": {
+      "src": "../../node_modules/lucide-react/dist/esm/lucide-react.js",
+      "file": "lucide-react.js",
+      "fileHash": "46a3a65a",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-E5ODL3YF": {
+      "file": "chunk-E5ODL3YF.js"
+    },
+    "chunk-65KY755N": {
+      "file": "chunk-65KY755N.js"
+    },
+    "chunk-V4OQ3NZ2": {
+      "file": "chunk-V4OQ3NZ2.js"
+    }
+  }
+}

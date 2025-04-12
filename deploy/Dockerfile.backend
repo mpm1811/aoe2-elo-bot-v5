@@ -1,0 +1,30 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+# Install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY . .
+
+# Expose port
+EXPOSE 5000
+
+# Create directory for health check
+RUN mkdir -p app/routes
+
+# Create a health check endpoint
+RUN echo 'from flask import Blueprint, jsonify\n\nhealth_bp = Blueprint("health", __name__)\n\n@health_bp.route("/health", methods=["GET"])\ndef health_check():\n    return jsonify({"status": "ok", "message": "API is running"}), 200' > app/routes/health.py
+
+# Create __init__.py if it doesn't exist
+RUN if [ ! -f app/__init__.py ]; then \
+      echo 'from flask import Flask\n\ndef create_app():\n    app = Flask(__name__)\n    return app' > app/__init__.py; \
+    fi
+
+# Update __init__.py to include health blueprint
+RUN echo '\nfrom app.routes.health import health_bp\n\ndef register_blueprints(app):\n    app.register_blueprint(health_bp, url_prefix="/api")\n\n# Update create_app to register blueprints\ntry:\n    original_create_app = create_app\n    def create_app(*args, **kwargs):\n        app = original_create_app(*args, **kwargs)\n        register_blueprints(app)\n        return app\nexcept NameError:\n    pass' >> app/__init__.py
+
+# Run the application
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "run:app"]

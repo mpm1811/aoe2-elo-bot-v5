@@ -7,8 +7,8 @@ import routes from "tempo-routes";
 const PlayerList = lazy(() => import("./components/players/PlayerList"));
 const PlayerForm = lazy(() => import("./components/players/PlayerForm"));
 const LoginForm = lazy(() => import("./components/Auth/LoginForm"));
-const MatchList = lazy(() => import("./components/matches/MatchList"));
-const MatchEditForm = lazy(() => import("./components/matches/MatchEditForm"));
+const MatchList = lazy(() => import("./components/Matches/MatchList"));
+const MatchEditForm = lazy(() => import("./components/Matches/MatchEditForm"));
 
 function App() {
   return (
